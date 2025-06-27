@@ -32,6 +32,6 @@ jobs:
 
 Add github secrets :
 
-SSH_HOST :54.39.45.76
+SSH_HOST : 3.94.125.19
 SSH_USER : ubuntu
 SSH_PRIVATE_KEY :
