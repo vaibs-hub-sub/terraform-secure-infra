@@ -27,11 +27,3 @@ jobs:
               terraform plan -out=tfplan
               terraform apply -auto-approve tfplan
             EOF
-
-
-
-Add github secrets :
-
-SSH_HOST : 3.94.125.19
-SSH_USER : ubuntu
-SSH_PRIVATE_KEY :
