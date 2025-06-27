@@ -1,0 +1,28 @@
+name: Terraform Infra Destroy
+
+on:
+  workflow_dispatch:  # Manual trigger only
+
+jobs:
+  destroy:
+    runs-on: ubuntu-latest
+    name: Destroy Infra on Remote via Terraform
+
+    steps:
+      - name: Checkout (optional if needed)
+        uses: actions/checkout@v3
+
+      - name: SSH into server and run Terraform destroy
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}     # e.g., 'ubuntu'
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            echo "[+] Switching to root to destroy infra..."
+            sudo -i <<EOF
+              cd /root/terraform-secure-infra
+              terraform init
+              terraform destroy -auto-approve
+            EOF
+

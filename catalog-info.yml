@@ -1,0 +1,20 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: terraform-secure-infra
+  description: |
+    Terraform-based secure infrastructure automation with GitHub Actions.
+    Provision and destroy infrastructure.
+  tags:
+    - terraform
+    - infrastructure
+    - github-actions
+  annotations:
+    github.com/project-slug: vaibs-hub-sub/terraform-secure-infra
+    backstage.io/techdocs-ref: dir:.
+    # Enables GitHub Actions plugin integration
+    github.com/actions: vaibs-hub-sub/terraform-secure-infra
+spec:
+  type: service
+  lifecycle: experimental
+  owner: dev-team
