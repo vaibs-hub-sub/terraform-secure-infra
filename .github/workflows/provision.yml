@@ -1,0 +1,37 @@
+name: Terraform Infra Provision via Root
+
+on:
+  workflow_dispatch:
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    name: Run Terraform from Remote Server as Root
+
+    steps:
+      - name: Checkout (this repo contains only workflow)
+        uses: actions/checkout@v3
+
+      - name: SSH into Server and Run Terraform as root
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}     # typically 'ubuntu'
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            echo "[+] Switching to root user..."
+            sudo -i <<EOF
+              echo "[+] Moved to root. Running Terraform..."
+              cd /root/terraform-secure-infra
+              terraform init
+              terraform plan -out=tfplan
+              terraform apply -auto-approve tfplan
+            EOF
+
+
+
+Add github secrets :
+
+SSH_HOST :54.39.45.76
+SSH_USER : ubuntu
+SSH_PRIVATE_KEY :
